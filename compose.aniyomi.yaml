@@ -1,0 +1,15 @@
+# Compatibility for installations with an existing host-file APK token.
+# APK support is already included in compose.yaml; new installs do not need this file.
+services:
+  moa:
+    environment:
+      MOA_APK_SECRET_FILE: /run/secrets/apk-token
+    secrets: [apk-token]
+  moa-apk:
+    environment:
+      MOA_APK_SECRET_FILE: /run/secrets/apk-token
+      MOA_APK_GENERATE_SECRET: "0"
+    secrets: [apk-token]
+secrets:
+  apk-token:
+    file: ${MOA_APK_TOKEN_FILE:-./data/apk-config/token}
